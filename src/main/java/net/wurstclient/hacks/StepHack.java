@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 - 2020 | Alexander01998 | All rights reserved.
+ * Copyright (c) 2014-2021 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -85,7 +85,7 @@ public final class StepHack extends Hack implements UpdateListener
 		
 		Box box = player.getBoundingBox().offset(0, 0.05, 0).expand(0.05);
 		
-		if(!MC.world.doesNotCollide(player, box.offset(0, 1, 0)))
+		if(!MC.world.isSpaceEmpty(player, box.offset(0, 1, 0)))
 			return;
 		
 		double stepHeight = -1;

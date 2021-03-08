@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 - 2020 | Alexander01998 | All rights reserved.
+ * Copyright (c) 2014-2021 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -74,7 +74,7 @@ public final class GlideHack extends Hack implements UpdateListener
 		{
 			Box box = player.getBoundingBox();
 			box = box.union(box.offset(0, -minHeight.getValue(), 0));
-			if(!MC.world.doesNotCollide(box))
+			if(!MC.world.isSpaceEmpty(box))
 				return;
 			
 			BlockPos min =

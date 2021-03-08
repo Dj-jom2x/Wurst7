@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 - 2020 | Wurst-Imperium | All rights reserved.
+ * Copyright (c) 2014-2021 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -31,7 +31,7 @@ public class SwordItemMixin extends ToolItem implements ISwordItem
 	
 	@Shadow
 	@Final
-	private Multimap<EntityAttribute, EntityAttributeModifier> field_23745;
+	private Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 	
 	private SwordItemMixin(WurstClient wurst, ToolMaterial material,
 		Settings settings)
@@ -42,7 +42,8 @@ public class SwordItemMixin extends ToolItem implements ISwordItem
 	@Override
 	public float fuckMcAfee()
 	{
-		return (float)field_23745.get(EntityAttributes.GENERIC_ATTACK_SPEED)
-			.iterator().next().getValue();
+		return (float)attributeModifiers
+			.get(EntityAttributes.GENERIC_ATTACK_SPEED).iterator().next()
+			.getValue();
 	}
 }

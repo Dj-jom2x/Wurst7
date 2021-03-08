@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 - 2020 | Alexander01998 | All rights reserved.
+ * Copyright (c) 2014-2021 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -43,6 +43,7 @@ public final class HackList implements UpdateListener
 	public final AutoFarmHack autoFarmHack = new AutoFarmHack();
 	public final AutoFishHack autoFishHack = new AutoFishHack();
 	public final AutoMineHack autoMineHack = new AutoMineHack();
+	public final AutoMLGHack autoMLGHack = new AutoMLGHack();
 	public final AutoPotionHack autoPotionHack = new AutoPotionHack();
 	public final AutoReconnectHack autoReconnectHack = new AutoReconnectHack();
 	public final AutoRespawnHack autoRespawnHack = new AutoRespawnHack();
@@ -80,6 +81,7 @@ public final class HackList implements UpdateListener
 	public final FastBreakHack fastBreakHack = new FastBreakHack();
 	public final FastLadderHack fastLadderHack = new FastLadderHack();
 	public final FastPlaceHack fastPlaceHack = new FastPlaceHack();
+	public final FeedAuraHack feedAuraHack = new FeedAuraHack();
 	public final FightBotHack fightBotHack = new FightBotHack();
 	public final FishHack fishHack = new FishHack();
 	public final FlightHack flightHack = new FlightHack();
@@ -123,6 +125,7 @@ public final class HackList implements UpdateListener
 	public final NoWebHack noWebHack = new NoWebHack();
 	public final NukerHack nukerHack = new NukerHack();
 	public final NukerLegitHack nukerLegitHack = new NukerLegitHack();
+	public final OpenWaterEspHack openWaterEspHack = new OpenWaterEspHack();
 	public final OverlayHack overlayHack = new OverlayHack();
 	public final PanicHack panicHack = new PanicHack();
 	public final ParkourHack parkourHack = new ParkourHack();
@@ -146,6 +149,7 @@ public final class HackList implements UpdateListener
 	public final SpiderHack spiderHack = new SpiderHack();
 	public final StepHack stepHack = new StepHack();
 	public final ThrowHack throwHack = new ThrowHack();
+	public final TillauraHack tillauraHack = new TillauraHack();
 	public final TimerHack timerHack = new TimerHack();
 	public final TiredHack tiredHack = new TiredHack();
 	public final TooManyHaxHack tooManyHaxHack = new TooManyHaxHack();
@@ -156,90 +160,90 @@ public final class HackList implements UpdateListener
 	public final TrueSightHack trueSightHack = new TrueSightHack();
 	public final TunnellerHack tunnellerHack = new TunnellerHack();
 	public final XRayHack xRayHack = new XRayHack();
-	
+
 	private final TreeMap<String, Hack> hax =
 		new TreeMap<>((o1, o2) -> o1.compareToIgnoreCase(o2));
-	
+
 	private final EnabledHacksFile enabledHacksFile;
 	private final Path profilesFolder =
 		WurstClient.INSTANCE.getWurstFolder().resolve("enabled hacks");
-	
+
 	private final EventManager eventManager =
 		WurstClient.INSTANCE.getEventManager();
-	
+
 	public HackList(Path enabledHacksFile)
 	{
 		this.enabledHacksFile = new EnabledHacksFile(enabledHacksFile);
-		
+
 		try
 		{
 			for(Field field : HackList.class.getDeclaredFields())
 			{
 				if(!field.getName().endsWith("Hack"))
 					continue;
-				
+
 				Hack hack = (Hack)field.get(this);
 				hax.put(hack.getName(), hack);
 			}
-			
+
 		}catch(Exception e)
 		{
 			String message = "Initializing Wurst hacks";
 			CrashReport report = CrashReport.create(e, message);
 			throw new CrashException(report);
 		}
-		
+
 		eventManager.add(UpdateListener.class, this);
 	}
-	
+
 	@Override
 	public void onUpdate()
 	{
 		enabledHacksFile.load(this);
 		eventManager.remove(UpdateListener.class, this);
 	}
-	
+
 	public void saveEnabledHax()
 	{
 		enabledHacksFile.save(this);
 	}
-	
+
 	public Hack getHackByName(String name)
 	{
 		return hax.get(name);
 	}
-	
+
 	public Collection<Hack> getAllHax()
 	{
 		return Collections.unmodifiableCollection(hax.values());
 	}
-	
+
 	public int countHax()
 	{
 		return hax.size();
 	}
-	
+
 	public ArrayList<Path> listProfiles()
 	{
 		if(!Files.isDirectory(profilesFolder))
 			return new ArrayList<>();
-		
+
 		try(Stream<Path> files = Files.list(profilesFolder))
 		{
 			return files.filter(Files::isRegularFile)
 				.collect(Collectors.toCollection(() -> new ArrayList<>()));
-			
+
 		}catch(IOException e)
 		{
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public void loadProfile(String fileName) throws IOException, JsonException
 	{
 		enabledHacksFile.loadProfile(this, profilesFolder.resolve(fileName));
 	}
-	
+
 	public void saveProfile(String fileName) throws IOException, JsonException
 	{
 		enabledHacksFile.saveProfile(this, profilesFolder.resolve(fileName));

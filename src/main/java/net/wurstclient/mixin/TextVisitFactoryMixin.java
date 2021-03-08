@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 - 2020 | Alexander01998 | All rights reserved.
+ * Copyright (c) 2014-2021 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -18,10 +18,10 @@ import net.wurstclient.WurstClient;
 public abstract class TextVisitFactoryMixin
 {
 	@ModifyArg(at = @At(value = "INVOKE",
-		target = "Lnet/minecraft/client/font/TextVisitFactory;visitFormatted(Ljava/lang/String;ILnet/minecraft/text/Style;Lnet/minecraft/text/Style;Lnet/minecraft/client/font/TextVisitFactory$CharacterVisitor;)Z",
+		target = "Lnet/minecraft/client/font/TextVisitFactory;visitFormatted(Ljava/lang/String;ILnet/minecraft/text/Style;Lnet/minecraft/text/Style;Lnet/minecraft/text/CharacterVisitor;)Z",
 		ordinal = 0),
 		method = {
-			"visitFormatted(Ljava/lang/String;ILnet/minecraft/text/Style;Lnet/minecraft/client/font/TextVisitFactory$CharacterVisitor;)Z"},
+			"visitFormatted(Ljava/lang/String;ILnet/minecraft/text/Style;Lnet/minecraft/text/CharacterVisitor;)Z"},
 		index = 0)
 	private static String adjustText(String text)
 	{

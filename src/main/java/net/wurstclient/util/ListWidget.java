@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2014-2021 Wurst-Imperium and contributors.
+ *
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
+ */
 package net.wurstclient.util;
 
 import java.util.Collections;
@@ -133,7 +140,7 @@ public abstract class ListWidget extends AbstractParentElement
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder bufferBuilder = tessellator.getBuffer();
 			client.getTextureManager()
-				.bindTexture(DrawableHelper.BACKGROUND_TEXTURE);
+				.bindTexture(DrawableHelper.OPTIONS_BACKGROUND_TEXTURE);
 			RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 			bufferBuilder.begin(7, VertexFormats.POSITION_TEXTURE_COLOR);
 			bufferBuilder.vertex(left, bottom, 0.0D)
@@ -420,7 +427,7 @@ public abstract class ListWidget extends AbstractParentElement
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferBuilder = tessellator.getBuffer();
 		client.getTextureManager()
-			.bindTexture(DrawableHelper.BACKGROUND_TEXTURE);
+			.bindTexture(DrawableHelper.OPTIONS_BACKGROUND_TEXTURE);
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		bufferBuilder.begin(7, VertexFormats.POSITION_TEXTURE_COLOR);
 		bufferBuilder.vertex(left, bottom, 0.0D).texture(0.0F, bottom / 32.0F)

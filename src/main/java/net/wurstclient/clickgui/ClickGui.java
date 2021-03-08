@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 - 2020 | Alexander01998 | All rights reserved.
+ * Copyright (c) 2014-2021 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -27,7 +27,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
 import net.wurstclient.Category;
 import net.wurstclient.Feature;
 import net.wurstclient.WurstClient;
@@ -840,7 +839,7 @@ public final class ClickGui
 		GL11.glColor4f(1, 1, 1, 1);
 		TextRenderer fr = MC.textRenderer;
 		String title =
-			((Text)fr.trimToWidth(new LiteralText(window.getTitle()), x3 - x1))
+			fr.trimToWidth(new LiteralText(window.getTitle()), x3 - x1)
 				.getString();
 		fr.draw(matrixStack, title, x1 + 2, y1 + 3, 0xf0f0f0);
 		GL11.glEnable(GL11.GL_BLEND);
